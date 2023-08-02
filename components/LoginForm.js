@@ -11,9 +11,9 @@ const LoginForm = (props) => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
-        props.nav.replace('home', {
-          prenom: auth.currentUser.displayName,
-        });
+        // props.nav.replace('home', {
+        //   prenom: auth.currentUser.displayName,
+        // });
         console.log(auth.currentUser.displayName);
       }
     });

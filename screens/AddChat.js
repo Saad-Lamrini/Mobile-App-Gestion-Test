@@ -80,7 +80,11 @@ const AddChat = ({ navigation }) => {
             }
           />
         </View>
-        <Button title="Nouvelle conversation" onPress={createChat} />
+        <Button
+          disabled={!input}
+          title="Nouvelle conversation"
+          onPress={createChat}
+        />
       </View>
     </View>
   );

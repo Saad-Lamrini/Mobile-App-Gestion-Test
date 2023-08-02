@@ -9,8 +9,9 @@ import {
   ScrollView,
   Keyboard,
   TouchableWithoutFeedback,
+  StyleSheet,
 } from 'react-native';
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { KeyboardAvoidingView } from 'react-native';
 import initfirebase from '../firebase';
@@ -18,9 +19,16 @@ import initfirebase from '../firebase';
 const Conversation = ({ navigation, route }) => {
   const db = initfirebase.firestore();
   const [input, setInput] = useState('');
+  const [messages, SetMessages] = useState([]);
   const auth = initfirebase.auth();
   const senMessg = () => {
     Keyboard.dismiss();
+    db.collection('chats').doc(route.params.id).collection('messages').add({
+      messageText: input,
+      email: auth.currentUser.email,
+      sender: auth.currentUser.displayName,
+      timestampField: new Date(),
+    });
 
     setInput('');
   };
@@ -93,8 +101,23 @@ const Conversation = ({ navigation, route }) => {
 
       //headerTransparent: true,
     });
-  }, [navigation]);
-
+  }, [navigation, messages]);
+  useLayoutEffect(() => {
+    const unsubscribe = db
+      .collection('chats')
+      .doc(route.params.id)
+      .collection('messages')
+      .orderBy('timestampField', 'asc')
+      .onSnapshot((snapshot) =>
+        SetMessages(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            data: doc.data(),
+          }))
+        )
+      );
+    return unsubscribe;
+  }, [route]);
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <StatusBar style="green" />
@@ -105,7 +128,51 @@ const Conversation = ({ navigation, route }) => {
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <>
-            <ScrollView>{/* chats here */}</ScrollView>
+            <ScrollView contentContainerStyle={{ paddingTop: 15 }}>
+              {messages.map(({ id, data }) =>
+                data.email === auth.currentUser.email ? (
+                  <View key={id} style={{}}>
+                    <Text
+                      style={{
+                        padding: 12,
+                        backgroundColor: '#2B68',
+                        alignSelf: 'flex-end',
+                        borderRadius: 20,
+                        marginRight: 15,
+                        marginBottom: 10,
+                        maxWidth: '80%',
+                        position: 'relative',
+                      }}
+                    >
+                      <Text style={{ fontWeight: 'bold' }}>Vous: </Text>
+                      {data.messageText}
+                    </Text>
+                  </View>
+                ) : (
+                  <View styles={{}}>
+                    <Text
+                      style={{
+                        padding: 12,
+                        backgroundColor: '#2B68E6',
+                        alignSelf: 'flex-start',
+                        borderRadius: 20,
+                        marginLeft: 15,
+                        marginBottom: 10,
+                        maxWidth: '80%',
+                        position: 'relative',
+                      }}
+                    >
+                      {' '}
+                      <Text style={{ fontWeight: 'bold' }}>
+                        {data.sender}:{' '}
+                      </Text>
+                      {data.messageText}
+                    </Text>
+                  </View>
+                )
+              )}
+            </ScrollView>
+
             <View
               style={{
                 flexDirection: 'row',

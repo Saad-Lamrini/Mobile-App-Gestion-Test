@@ -26,7 +26,7 @@ const SignupForm = () => {
           SetPw2('');
           SetEmail('');
           console.log(name);
-          //navigation.replace('login');
+          //navigation.replace('signup');
         })
         .catch((erreur) => {
           alert(erreur);
