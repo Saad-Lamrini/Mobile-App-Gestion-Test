@@ -1,8 +1,17 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  TextInput,
+  SafeAreaView,
+  ScrollView,
+} from 'react-native';
 import React, { useLayoutEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 
 import initfirebase from '../firebase';
+import Project from '../components/Project';
 const Home = ({ navigation }) => {
   const auth = initfirebase.auth();
   useLayoutEffect(() => {
@@ -68,9 +77,50 @@ const Home = ({ navigation }) => {
     });
   }, []);
   return (
-    <View>
+    <SafeAreaView>
       <StatusBar backgroundColor="red" />
-    </View>
+      {/* Search */}
+      <View style={{ height: 5 }}></View>
+      <View
+        style={{
+          marginLeft: 5,
+          flexDirection: 'row',
+          paddingTop: 4,
+          backgroundColor: 'red',
+          height: 40,
+          width: 360,
+          padding: 5,
+        }}
+      >
+        <View style={{ paddingTop: 8, marginLeft: 1 }}>
+          <Image
+            style={{ height: 18, width: 18 }}
+            source={{
+              uri: 'https://cdn-icons-png.flaticon.com/128/622/622669.png',
+            }}
+          />
+        </View>
+        <TextInput
+          placeholder="projets"
+          keyboardType="default"
+          style={{ width: 328, marginLeft: 9 }}
+        />
+        <View style={{ paddingTop: 8, marginLeft: 4 }}>
+          <Image
+            style={{ height: 18, width: 18 }}
+            source={{
+              uri: 'https://cdn-icons-png.flaticon.com/128/876/876144.png',
+            }}
+          />
+        </View>
+      </View>
+      {/* Search */}
+      <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
+        <Project title="test" description="testing" id="12" />
+        <Project title="test" description="testing" id="12" />
+        <Project title="test" description="testing" id="12" />
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
