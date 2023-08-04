@@ -18,11 +18,7 @@ export default function App() {
           component={Signup}
           options={{ headerShown: false, headerTitleAlign: 'center' }}
         />
-        <Stack.Screen
-          name="home"
-          component={Home}
-          options={{ headerShown: false, headerTitleAlign: 'center' }}
-        />
+        <Stack.Screen name="home" component={Home} />
         <Stack.Screen
           name="chats"
           component={Chats}
