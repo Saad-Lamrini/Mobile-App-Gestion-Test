@@ -17,6 +17,7 @@ const Home = ({ navigation }) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       title: 'chats',
+
       headerLeft: () => <View></View>,
       headerTitle: () => (
         <View
@@ -78,7 +79,7 @@ const Home = ({ navigation }) => {
   }, []);
   return (
     <SafeAreaView>
-      <StatusBar backgroundColor="red" />
+      <StatusBar style="green" />
       {/* Search */}
       <View style={{ height: 5 }}></View>
       <View

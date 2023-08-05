@@ -44,6 +44,9 @@ const Project = ({ title, description, id }) => {
         style={{ paddingTop: 7 }}
       >
         <System title="testing system" />
+        <System title="testing system" />
+        <System title="testing system" />
+        <System title="testing system" />
       </ScrollView>
     </View>
   );

@@ -3,7 +3,7 @@ import React from 'react';
 
 const System = ({ id, title, imgURL, short_description, fonctionnalites }) => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity style={{ backgroundColor: 'white', marginRight: 9 }}>
       <Image
         style={{ height: 144, width: 140 }}
         source={{
@@ -14,6 +14,7 @@ const System = ({ id, title, imgURL, short_description, fonctionnalites }) => {
         <Text style={{ fontWeight: 'bold', fontSize: 30, paddingTop: 6 }}>
           {title}
         </Text>
+        <View></View>
       </View>
     </TouchableOpacity>
   );
