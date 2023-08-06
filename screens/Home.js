@@ -7,13 +7,15 @@ import {
   SafeAreaView,
   ScrollView,
 } from 'react-native';
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 
 import initfirebase from '../firebase';
 import Project from '../components/Project';
 const Home = ({ navigation }) => {
+  const db = initfirebase.firestore();
   const auth = initfirebase.auth();
+  const [projets, setProjets] = useState([]);
   useLayoutEffect(() => {
     navigation.setOptions({
       title: 'chats',
@@ -77,6 +79,17 @@ const Home = ({ navigation }) => {
       ),
     });
   }, []);
+  useEffect(() => {
+    const unsubscribe = db.collection('projets').onSnapshot((snapshot) =>
+      setProjets(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          data: doc.data(),
+        }))
+      )
+    );
+    return unsubscribe;
+  }, []);
   return (
     <SafeAreaView>
       <StatusBar style="green" />
@@ -117,9 +130,15 @@ const Home = ({ navigation }) => {
       </View>
       {/* Search */}
       <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
+        {/* <Project title="test" description="testing" id="12" />
         <Project title="test" description="testing" id="12" />
-        <Project title="test" description="testing" id="12" />
-        <Project title="test" description="testing" id="12" />
+        <Project title="test" description="testing" id="12" /> */}
+        {projets.map(
+          ({ id, data: { nom } }) => (
+            console.log(nom, id),
+            (<Project title={nom} description="testing" id={id} />)
+          )
+        )}
       </ScrollView>
     </SafeAreaView>
   );
