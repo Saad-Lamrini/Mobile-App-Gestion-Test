@@ -5,6 +5,7 @@ import Home from './screens/Home';
 import Chats from './screens/Chats';
 import Conversation from './screens/Conversation';
 import AddChat from './screens/AddChat';
+import Applicationdocumentation from './screens/Applicationdocumentation';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 const Stack = createStackNavigator();
@@ -30,6 +31,10 @@ export default function App() {
           options={{ headerShown: false }}
         />
         <Stack.Screen name="conversation" component={Conversation} />
+        <Stack.Screen
+          name="documentation"
+          component={Applicationdocumentation}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

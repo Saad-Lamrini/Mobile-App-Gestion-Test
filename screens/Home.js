@@ -100,7 +100,7 @@ const Home = ({ navigation }) => {
           marginLeft: 5,
           flexDirection: 'row',
           paddingTop: 4,
-          backgroundColor: 'red',
+          backgroundColor: 'rgba(39, 209, 245, 0.4)',
           height: 40,
           width: 360,
           padding: 5,
@@ -130,13 +130,17 @@ const Home = ({ navigation }) => {
       </View>
       {/* Search */}
       <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
-        {/* <Project title="test" description="testing" id="12" />
-        <Project title="test" description="testing" id="12" />
-        <Project title="test" description="testing" id="12" /> */}
         {projets.map(
-          ({ id, data: { nom } }) => (
-            console.log(nom, id),
-            (<Project title={nom} description="testing" id={id} />)
+          ({ id, data }) => (
+            console.log(data.nom, id),
+            (
+              <Project
+                title={data.nom}
+                description={data.description}
+                id={id}
+                navigate={navigation}
+              />
+            )
           )
         )}
       </ScrollView>

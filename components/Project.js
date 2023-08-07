@@ -1,8 +1,28 @@
-import { View, Text, Image, ScrollView } from 'react-native';
-import React from 'react';
+import { View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
 import System from './System';
+import initfirebase from '../firebase';
+import { useLayoutEffect } from 'react';
+const Project = ({ title, description, id, navigate }, props) => {
+  const db = initfirebase.firestore();
+  const auth = initfirebase.auth();
+  const [system, SetSystem] = useState([]);
+  useLayoutEffect(() => {
+    const unsubscribe = db
+      .collection('projets')
+      .doc(id)
+      .collection('systems')
 
-const Project = ({ title, description, id }) => {
+      .onSnapshot((snapshot) =>
+        SetSystem(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            data: doc.data(),
+          }))
+        )
+      );
+    return unsubscribe;
+  }, []);
   return (
     <View style={{}}>
       <View
@@ -18,6 +38,7 @@ const Project = ({ title, description, id }) => {
         }}
       >
         <Text style={{ fontWeight: 'bold', fontSize: 22 }}>{title}</Text>
+
         <Image
           style={{ height: 20, width: 20 }}
           source={{
@@ -43,10 +64,24 @@ const Project = ({ title, description, id }) => {
         showsHorizontalScrollIndicator={false}
         style={{ paddingTop: 7 }}
       >
+        {system.map(
+          ({ id, data }) => (
+            console.log(data.nom, id, data.documentation),
+            (
+              <System
+                title={data.nom}
+                id={id}
+                imgURL={data.imgURL}
+                description={data.documentation}
+                navigate1={navigate}
+              />
+            )
+          )
+        )}
+        {/* <System title="testing system" />
         <System title="testing system" />
         <System title="testing system" />
-        <System title="testing system" />
-        <System title="testing system" />
+        <System title="testing system" /> */}
       </ScrollView>
     </View>
   );
