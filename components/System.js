@@ -9,11 +9,19 @@ const System = ({
   fonctionnalites,
   navigate1,
 }) => {
+  const params = {
+    titre: { title },
+    description: { description },
+  };
+  console.log(title);
   return (
     <TouchableOpacity
       style={{ backgroundColor: 'white', marginRight: 9 }}
       onPress={() => {
-        navigate1.navigate('documentation');
+        navigate1.navigate('documentation', {
+          titre: title,
+          documentation: description,
+        });
       }}
     >
       <View style={{ paddingTop: 4 }}>
