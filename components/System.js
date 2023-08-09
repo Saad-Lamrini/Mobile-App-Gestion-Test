@@ -37,7 +37,13 @@ const System = ({
           }}
         />
       </View>
-      <View style={{ padding: 12, paddingBottom: 8 }}>
+      <View
+        style={{
+          padding: 8,
+          paddingBottom: 8,
+          backgroundColor: 'rgba(0, 159, 255, 0.8)',
+        }}
+      >
         <Text
           style={{
             fontWeight: 'bold',

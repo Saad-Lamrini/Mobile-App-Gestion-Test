@@ -38,13 +38,48 @@ const Project = ({ title, description, id, navigate }, props) => {
         }}
       >
         <Text style={{ fontWeight: 'bold', fontSize: 22 }}>{title}</Text>
-
-        <Image
-          style={{ height: 20, width: 20 }}
-          source={{
-            uri: 'https://cdn-icons-png.flaticon.com/128/271/271226.png',
-          }}
-        />
+        <View style={{ flexDirection: 'row', padding: 2 }}>
+          <TouchableOpacity
+            onPress={() => {
+              navigate.navigate('recette', { titre: title, id: id });
+            }}
+          >
+            <View
+              style={{
+                //paddingRight: 24,
+                width: 110,
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'row',
+                borderWidth: 1, // Largeur de la bordure en pixels
+                borderColor: 'black', // Couleur de la bordure
+                // padding: 10, // Espace intérieur pour dégager la bordure
+                borderRadius: 8, // Rayon des coins de la bordure
+                //marginBottom: 20,
+              }}
+            >
+              <Image
+                style={{ height: 20, width: 20 }}
+                source={{
+                  uri: 'https://cdn-icons-png.flaticon.com/128/2916/2916315.png',
+                }}
+              />
+              <Text
+                style={{ paddingLeft: 6, fontWeight: 'bold', fontSize: 15 }}
+              >
+                Recette
+              </Text>
+            </View>
+          </TouchableOpacity>
+          <View style={{ paddingLeft: 10, paddingTop: 2 }}>
+            <Image
+              style={{ height: 20, width: 20 }}
+              source={{
+                uri: 'https://cdn-icons-png.flaticon.com/128/271/271226.png',
+              }}
+            />
+          </View>
+        </View>
       </View>
       <Text
         style={{

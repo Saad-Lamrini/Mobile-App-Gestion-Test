@@ -40,6 +40,7 @@ const LoginForm = (props) => {
     <FormContainer>
       <Text style={{ fontWeight: 'bold', paddingBottom: 5 }}>Email:</Text>
       <TextInput
+        keyboardType="email-address"
         placeholder="example@email.com"
         style={{
           borderWidth: 1,

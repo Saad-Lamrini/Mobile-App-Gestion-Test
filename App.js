@@ -5,6 +5,7 @@ import Home from './screens/Home';
 import Chats from './screens/Chats';
 import Conversation from './screens/Conversation';
 import AddChat from './screens/AddChat';
+import Recette from './screens/Recette';
 import Applicationdocumentation from './screens/Applicationdocumentation';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
@@ -35,6 +36,7 @@ export default function App() {
           name="documentation"
           component={Applicationdocumentation}
         />
+        <Stack.Screen name="recette" component={Recette} />
       </Stack.Navigator>
     </NavigationContainer>
   );

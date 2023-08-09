@@ -88,6 +88,7 @@ const SignupForm = () => {
         value={pw2}
         placeholder="******"
         secureTextEntry
+        keyboardType="email-address"
         style={{
           borderWidth: 1,
           borderColor: '#1b1b33',
