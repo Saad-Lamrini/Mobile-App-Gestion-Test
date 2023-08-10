@@ -68,7 +68,7 @@ const Recette = ({ navigation, route }) => {
       .collection('projets')
       .doc(route.params.id)
       .collection('scenarioTest')
-
+      .orderBy('UATSCENARION', 'asc')
       .onSnapshot((snapshot) =>
         setScenario(
           snapshot.docs.map((doc) => ({
