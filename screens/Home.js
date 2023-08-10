@@ -135,6 +135,7 @@ const Home = ({ navigation }) => {
             console.log(data.nom, id),
             (
               <Project
+                key={id}
                 title={data.nom}
                 description={data.description}
                 id={id}

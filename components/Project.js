@@ -104,6 +104,7 @@ const Project = ({ title, description, id, navigate }, props) => {
             console.log(data.nom, id, data.documentation),
             (
               <System
+                key={id}
                 title={data.nom}
                 id={id}
                 imgURL={data.imgURL}

@@ -85,6 +85,7 @@ const Recette = ({ navigation, route }) => {
       <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
         {scenario.map(({ id, data }) => (
           <Scenario
+            key={id}
             number={data.UATSCENARION}
             label={data.LABEL}
             preq={data.PREREQUISITE}

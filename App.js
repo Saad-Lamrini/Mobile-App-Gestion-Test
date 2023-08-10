@@ -21,11 +21,7 @@ export default function App() {
           options={{ headerShown: false, headerTitleAlign: 'center' }}
         />
         <Stack.Screen name="home" component={Home} />
-        <Stack.Screen
-          name="chats"
-          component={Chats}
-          options={{ headerShown: false }}
-        />
+        <Stack.Screen name="chats" component={Chats} />
         <Stack.Screen
           name="addchats"
           component={AddChat}
