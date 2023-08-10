@@ -25,13 +25,21 @@ const firebaseConfig = {
   // messagingSenderId: '730301013908',
   // appId: '1:730301013908:web:d1bf80202399a94a673981',
 
-  apiKey: 'AIzaSyAdmQ6dyVydzQ1e-4fQER4SBWT5u9Dy3WQ',
-  authDomain: 'mobileappgestiontest-e2ac2.firebaseapp.com',
-  projectId: 'mobileappgestiontest-e2ac2',
-  storageBucket: 'mobileappgestiontest-e2ac2.appspot.com',
-  messagingSenderId: '1067877859479',
-  appId: '1:1067877859479:web:b0cf9107affc4b0f42e9d2',
-  measurementId: 'G-T73FH8KL6W',
+  // apiKey: 'AIzaSyAdmQ6dyVydzQ1e-4fQER4SBWT5u9Dy3WQ',
+  // authDomain: 'mobileappgestiontest-e2ac2.firebaseapp.com',
+  // projectId: 'mobileappgestiontest-e2ac2',
+  // storageBucket: 'mobileappgestiontest-e2ac2.appspot.com',
+  // messagingSenderId: '1067877859479',
+  // appId: '1:1067877859479:web:b0cf9107affc4b0f42e9d2',
+  // measurementId: 'G-T73FH8KL6W',
+
+  apiKey: 'AIzaSyA8h8NlOh-BdUANAXFIOCWH7omIy6q3j64',
+  authDomain: 'gestiontest-553fe.firebaseapp.com',
+  projectId: 'gestiontest-553fe',
+  storageBucket: 'gestiontest-553fe.appspot.com',
+  messagingSenderId: '235328410962',
+  appId: '1:235328410962:web:1da3802dbd1c6dae01968b',
+  measurementId: 'G-3B9TF35GKY',
 };
 
 // Initialize Firebase

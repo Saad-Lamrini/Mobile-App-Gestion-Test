@@ -127,6 +127,7 @@ const Chats = ({ navigation }) => {
         alert('created');
         console.log({ input });
         setShowModal(false);
+        setInput('');
       })
       .catch((erreur) => {
         alert(erreur);
@@ -200,6 +201,7 @@ const Chats = ({ navigation }) => {
               title="Annuler"
               onPress={() => {
                 // Add your logic here when "Ajouter" button is pressed
+                setInput('');
                 setShowModal(false);
               }}
               containerStyle={{ marginBottom: 10 }}
