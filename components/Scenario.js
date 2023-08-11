@@ -42,6 +42,7 @@ const Scenario = ({ number, route, label, preq, id, projet }) => {
         <StepContainer preq1={preq} />
         {step.map(({ id, data }) => (
           <StepcaseContainer
+            key={id}
             numero={data.numero}
             contenu={data.contenu}
             etat={data.etat}
