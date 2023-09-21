@@ -99,21 +99,16 @@ const Project = ({ title, description, id, navigate }, props) => {
         showsHorizontalScrollIndicator={false}
         style={{ paddingTop: 7 }}
       >
-        {system.map(
-          ({ id, data }) => (
-            console.log(data.nom, id, data.documentation),
-            (
-              <System
-                key={id}
-                title={data.nom}
-                id={id}
-                imgURL={data.imgURL}
-                description={data.documentation}
-                navigate1={navigate}
-              />
-            )
-          )
-        )}
+        {system.map(({ id, data }) => (
+          <System
+            key={id}
+            title={data.nom}
+            id={id}
+            imgURL={data.imgURL}
+            description={data.documentation}
+            navigate1={navigate}
+          />
+        ))}
         {/* <System title="testing system" />
         <System title="testing system" />
         <System title="testing system" />
