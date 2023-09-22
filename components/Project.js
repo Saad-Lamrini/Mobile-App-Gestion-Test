@@ -6,6 +6,7 @@ import { useLayoutEffect } from 'react';
 const Project = ({ title, description, id, navigate }, props) => {
   const db = initfirebase.firestore();
   const auth = initfirebase.auth();
+  const projet = id;
   const [system, SetSystem] = useState([]);
   useLayoutEffect(() => {
     const unsubscribe = db
@@ -107,6 +108,8 @@ const Project = ({ title, description, id, navigate }, props) => {
             imgURL={data.imgURL}
             description={data.documentation}
             navigate1={navigate}
+            auth1={auth}
+            projet={projet}
           />
         ))}
         {/* <System title="testing system" />

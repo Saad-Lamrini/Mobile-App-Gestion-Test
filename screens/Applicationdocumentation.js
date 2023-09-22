@@ -7,6 +7,7 @@ const Applicationdocumentation = ({ route }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{titre}</Text>
+
       <Text style={styles.paragraph}>{documentation}</Text>
     </View>
   );

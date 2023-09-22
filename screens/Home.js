@@ -250,6 +250,8 @@ const Home = ({ navigation }) => {
                 setNotif(text);
               }}
               value={notif}
+              multiline
+              numberOfLines={4}
               placeholder="Saisir notification ..."
             />
             <TouchableOpacity
