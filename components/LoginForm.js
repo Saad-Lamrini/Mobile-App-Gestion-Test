@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Dimensions } from 'react-native';
 import FormContainer from './FormContainer';
@@ -7,7 +7,10 @@ const LoginForm = (props) => {
   const [email, SetEmail] = useState();
   const [password, Setpassword] = useState();
   const auth = initfirebase.auth();
-
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
@@ -56,20 +59,37 @@ const LoginForm = (props) => {
       <Text style={{ fontWeight: 'bold', paddingBottom: 5 }}>
         Mot de passe:
       </Text>
-      <TextInput
-        placeholder="******"
-        secureTextEntry
-        style={{
-          borderWidth: 1,
-          borderColor: '#1b1b33',
-          height: 35,
-          borderRadius: 8,
-          fontSize: 16,
-          paddingLeft: 10,
-          marginBottom: 20,
-        }}
-        onChangeText={(text) => Setpassword(text)}
-      />
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <TextInput
+          placeholder="******"
+          secureTextEntry={!showPassword}
+          style={{
+            borderWidth: 1,
+            borderColor: '#1b1b33',
+            height: 35,
+            borderRadius: 8,
+            fontSize: 16,
+            paddingLeft: 10,
+            marginBottom: 20,
+            width: 320,
+          }}
+          onChangeText={(text) => Setpassword(text)}
+        />
+        <TouchableOpacity onPress={togglePasswordVisibility}>
+          <Image
+            source={{
+              uri: 'https://cdn-icons-png.flaticon.com/128/159/159604.png',
+            }}
+            style={{
+              width: 24,
+              height: 24,
+              marginHorizontal: 10,
+              marginBottom: 20,
+              tintColor: showPassword ? 'black' : 'gray', // Change icon color based on state
+            }}
+          />
+        </TouchableOpacity>
+      </View>
       <TouchableOpacity
         style={{
           height: 45,
