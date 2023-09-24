@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import System from './System';
 import initfirebase from '../firebase';
 import { useLayoutEffect } from 'react';
+import { Button } from 'react-native-elements';
 const Project = ({ title, description, id, navigate }, props) => {
   const db = initfirebase.firestore();
   const auth = initfirebase.auth();
@@ -40,6 +41,23 @@ const Project = ({ title, description, id, navigate }, props) => {
       >
         <Text style={{ fontWeight: 'bold', fontSize: 22 }}>{title}</Text>
         <View style={{ flexDirection: 'row', padding: 2 }}>
+          {/* Vérifiez si l'utilisateur est "saad" avant d'afficher le bouton */}
+          {auth.currentUser && auth.currentUser.displayName === 'Saad' && (
+            <View style={{ paddingRight: 10, paddingTop: 1 }}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigate.navigate('Priorite', { id: id });
+                }}
+              >
+                <Image
+                  style={{ height: 20, width: 20 }}
+                  source={{
+                    uri: 'https://cdn-icons-png.flaticon.com/128/4014/4014721.png',
+                  }}
+                />
+              </TouchableOpacity>
+            </View>
+          )}
           <TouchableOpacity
             onPress={() => {
               navigate.navigate('recette', { titre: title, id: id });
