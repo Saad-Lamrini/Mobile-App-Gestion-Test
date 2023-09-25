@@ -46,6 +46,25 @@ const Project = ({ title, description, id, navigate }, props) => {
             <View style={{ paddingRight: 10, paddingTop: 1 }}>
               <TouchableOpacity
                 onPress={() => {
+                  navigate.navigate('Avancement', {
+                    id: id,
+                    navigate2: navigate,
+                  });
+                }}
+              >
+                <Image
+                  style={{ height: 20, width: 20 }}
+                  source={{
+                    uri: 'https://cdn-icons-png.flaticon.com/128/3446/3446795.png',
+                  }}
+                />
+              </TouchableOpacity>
+            </View>
+          )}
+          {auth.currentUser && auth.currentUser.displayName === 'Saad' && (
+            <View style={{ paddingRight: 10, paddingTop: 1 }}>
+              <TouchableOpacity
+                onPress={() => {
                   navigate.navigate('Priorite', { id: id });
                 }}
               >
