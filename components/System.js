@@ -20,14 +20,7 @@ const System = ({
     <TouchableOpacity
       style={{ backgroundColor: 'white', marginRight: 9 }}
       onPress={() => {
-        if (auth1.currentUser.displayName == 'Saad') {
-          navigate1.navigate('documentation', {
-            titre: title,
-            documentation: description,
-            id: id,
-            auth: auth1,
-          });
-        } else {
+        if (auth1.currentUser.displayName == 'Elhassan') {
           navigate1.navigate('documentatio', {
             titre: title,
             documentation: description,
@@ -35,6 +28,13 @@ const System = ({
             auth: auth1,
             navigation2: navigate1,
             projet: projet,
+          });
+        } else {
+          navigate1.navigate('documentation', {
+            titre: title,
+            documentation: description,
+            id: id,
+            auth: auth1,
           });
         }
       }}

@@ -2,11 +2,14 @@ import { View, Text, StyleSheet, TextInput } from 'react-native';
 import React from 'react';
 import { useEffect } from 'react';
 import { Button } from 'react-native-elements';
+import { Snackbar } from 'react-native-paper';
 import initfirebase from '../firebase';
+import { useState } from 'react';
 const Adddocum = ({ route }) => {
   const { titre, documentation, id, auth, navigation2, projet } = route.params;
   const [text, setText] = React.useState(documentation);
   const db = initfirebase.firestore();
+  const [error, setError] = useState('');
   useEffect(() => {
     // Dynamically update navigation options
     navigation2.setOptions({
@@ -52,9 +55,7 @@ const Adddocum = ({ route }) => {
                 ['documentation']: text,
               });
 
-              console.log(
-                `Field ${'documentation'} updated successfully in document `
-              );
+              setError('Documentation modifiée');
             } catch (error) {
               console.error('Error updating field:');
             }
@@ -75,6 +76,16 @@ const Adddocum = ({ route }) => {
           }}
         />
       </View>
+      {error !== '' && (
+        <Snackbar
+          visible={error !== ''}
+          onDismiss={() => setError('')}
+          duration={3000} // Durée d'affichage du message d'erreur
+          style={[styles.errorSnackbar, { bottom: 0 }]}
+        >
+          {error}
+        </Snackbar>
+      )}
     </View>
   );
 };
@@ -101,6 +112,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     fontSize: 18,
+  },
+
+  errorSnackbar: {
+    backgroundColor: 'green', // Couleur de fond du message d'erreur
   },
 });
 export default Adddocum;

@@ -1,15 +1,29 @@
-import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Dimensions } from 'react-native';
 import FormContainer from './FormContainer';
+import { Snackbar } from 'react-native-paper';
 import initfirebase from '../firebase';
 const LoginForm = (props) => {
   const [email, SetEmail] = useState();
   const [password, Setpassword] = useState();
   const auth = initfirebase.auth();
+  const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+  const isValidEmail = (email) => {
+    // Regular expression for basic email validation
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    return emailRegex.test(email);
   };
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
@@ -23,22 +37,23 @@ const LoginForm = (props) => {
     return unsubscribe;
   }, []);
   const onclicking = () => {
-    if (email.length > 0 && email.includes('@')) {
-      if (password.length > 5) {
-        console.log('jjgjgj');
-        auth
-          .signInWithEmailAndPassword(email, password)
-          .then(() => {
-            props.nav.replace('home', {
-              prenom: auth.currentUser.displayName,
-            });
-          })
-          .catch((erreur) => {
-            alert(erreur);
+    if (!isValidEmail(email)) {
+      setError("L'adresse e-mail n'est pas valide");
+    } else {
+      console.log('jjgjgj');
+      auth
+        .signInWithEmailAndPassword(email, password)
+        .then(() => {
+          props.nav.replace('home', {
+            prenom: auth.currentUser.displayName,
           });
-      }
+        })
+        .catch((erreur) => {
+          alert(erreur);
+        });
     }
   };
+
   return (
     <FormContainer>
       <Text style={{ fontWeight: 'bold', paddingBottom: 5 }}>Email:</Text>
@@ -102,8 +117,22 @@ const LoginForm = (props) => {
       >
         <Text style={{ fontSize: 18, color: 'black' }}>Connexion</Text>
       </TouchableOpacity>
+      {error !== '' && (
+        <Snackbar
+          visible={error !== ''}
+          onDismiss={() => setError('')}
+          duration={3000} // Durée d'affichage du message d'erreur
+          style={[styles.errorSnackbar, { marginBottom: 190 }]}
+        >
+          {error}
+        </Snackbar>
+      )}
     </FormContainer>
   );
 };
-
+const styles = StyleSheet.create({
+  errorSnackbar: {
+    backgroundColor: 'red', // Couleur de fond du message d'erreur
+  },
+});
 export default LoginForm;

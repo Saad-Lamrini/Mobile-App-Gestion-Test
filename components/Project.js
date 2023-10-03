@@ -3,11 +3,13 @@ import React, { useState } from 'react';
 import System from './System';
 import initfirebase from '../firebase';
 import { useLayoutEffect } from 'react';
+
 import { Button } from 'react-native-elements';
 const Project = ({ title, description, id, navigate }, props) => {
   const db = initfirebase.firestore();
   const auth = initfirebase.auth();
   const projet = id;
+  const [error, setError] = useState('');
   const [system, SetSystem] = useState([]);
   useLayoutEffect(() => {
     const unsubscribe = db
@@ -42,7 +44,7 @@ const Project = ({ title, description, id, navigate }, props) => {
         <Text style={{ fontWeight: 'bold', fontSize: 22 }}>{title}</Text>
         <View style={{ flexDirection: 'row', padding: 2 }}>
           {/* Vérifiez si l'utilisateur est "saad" avant d'afficher le bouton */}
-          {auth.currentUser && auth.currentUser.displayName === 'Saad' && (
+          {auth.currentUser && auth.currentUser.displayName === 'Elhassan' && (
             <View style={{ paddingRight: 10, paddingTop: 1 }}>
               <TouchableOpacity
                 onPress={() => {
@@ -61,7 +63,7 @@ const Project = ({ title, description, id, navigate }, props) => {
               </TouchableOpacity>
             </View>
           )}
-          {auth.currentUser && auth.currentUser.displayName === 'Saad' && (
+          {auth.currentUser && auth.currentUser.displayName === 'Elhassan' && (
             <View style={{ paddingRight: 10, paddingTop: 1 }}>
               <TouchableOpacity
                 onPress={() => {

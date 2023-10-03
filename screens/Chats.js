@@ -6,17 +6,20 @@ import {
   TouchableOpacity,
   Image,
   Modal,
+  StyleSheet,
 } from 'react-native';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
 import CustomListItem from '../components/CustomListItem';
 import initfirebase from '../firebase';
+import { Snackbar } from 'react-native-paper';
 import { doc, setDoc } from 'firebase/firestore';
 import { Button, Input } from 'react-native-elements';
 
 const Chats = ({ navigation }) => {
   const [input, setInput] = useState('');
   const db = initfirebase.firestore();
+  const [error, setError] = useState('');
   const [chats, setChats] = useState([]);
   const [showModal, setShowModal] = useState(false);
   useLayoutEffect(() => {
@@ -124,10 +127,10 @@ const Chats = ({ navigation }) => {
       .collection('chats')
       .add({ chatName: input })
       .then(() => {
-        alert('created');
         console.log({ input });
         setShowModal(false);
         setInput('');
+        setError('Conversation est crée');
       })
       .catch((erreur) => {
         alert(erreur);
@@ -225,8 +228,22 @@ const Chats = ({ navigation }) => {
           )
         )}
       </ScrollView>
+      {error !== '' && (
+        <Snackbar
+          visible={error !== ''}
+          onDismiss={() => setError('')}
+          duration={3000} // Durée d'affichage du message d'erreur
+          style={[styles.errorSnackbar, { bottom: 0 }]}
+        >
+          {error}
+        </Snackbar>
+      )}
     </SafeAreaView>
   );
 };
-
+const styles = StyleSheet.create({
+  errorSnackbar: {
+    backgroundColor: 'green', // Couleur de fond du message d'erreur
+  },
+});
 export default Chats;
